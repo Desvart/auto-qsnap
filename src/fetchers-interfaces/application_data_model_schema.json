@@ -1,40 +1,62 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "?",
-  "title": "Product Catalogue ",
-  "description": "A list of items from the product catalogue.",
-  "type": "array",
-  "items": {
-    "type": "object",
+  "title": "Application Data model ",
+  "description": "Data model of the 'application' object",
+  "type": "object",
     "properties": {
+      "createdDate": {
+        "description": "The date of creation of the object.",
+        "type": "string"
+      },
       "eacode": {
         "description": "The unique identifier of the item.",
         "type": "string",
         "pattern": "^[A-Z]{2}-\\d{5}$"
+      },
+      "eacode2": {
+        "description": "The unique identifier of the item.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}-\\d{5}$"
+          },
+          "datasource": {
+            "type": "string"
+          },
+          "extractionDate": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}-\\d{5}$"
+          }
+        }
       },
       "trigram": {
         "description": "A trigram string associated to an item. Should be unique but exceptions exist.",
         "type": "string",
         "pattern": "^[A-Z]{3}$"
       },
-      "productName": {
+      "name": {
         "description": "The full name of the item.",
         "type": "string"
       },
-      "productManager": {
+      "manager": {
         "description": "First name and last name of the product manager.",
         "type": "string"
       },
-      "productOwner": {
+      "owner": {
         "description": "First name and last name of the product owner.",
+        "type": "string"
+      },
+      "unit": {
+        "description": "Unit managing the application in the organisation.",
         "type": "string"
       },
       "crownJewelsLevel": {
         "description": "The Crown Jewel category associated to the product.",
-        "type": "string",
         "enum": ["tier-1", "tier-2", "tier-3", "n/a"]
       },
-      "rtoLevel": {
+      "priorityLevel": {
         "description": "The RTO category associated to the product.",
         "enum": ["A0", "A1", "A2", "A3"]
       },
@@ -62,7 +84,6 @@
           "type": "string"
         }
       }
-    }
   },
   "uniqueItems": true,
   "required": [ "eacode", "trigram", "productName", "productManager", "productOwner, crownJewelsLevel", "rtoLevel", "provideEnterpriseServiceFlag", "webExposureFlag", "makeOrBuyCategory", "flaggedToBeDeleted"]
